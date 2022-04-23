@@ -19,9 +19,13 @@ else
 	cp $1 $PWD
 fi
 
-USER=$(head -n 1 $PWD/user.txt)
+FILEPATH=$1
+FILENAME=${FILEPATH##*/}
+FILENOEXT=${FILENAME%.*}
+USERFILE=$(head -n 1 $PWD/user.txt)
 
-qrencode -o $1.png https://www.github.com/$USER/qr-repo/blob/main/$1
+qrencode -o $FILENOEXT.png https://www.github.com/$USERFILE/qr-repo/blob/master/$FILENAME
+mv "$FILENAME".png $PWD
 
 git add .
 git commit -m 'new file'
