@@ -16,16 +16,15 @@ then
 	exit 1
 else
 	cp $1 $PWD
+	FILEPATH=$1
+	FILENAME=${FILEPATH##*/}
+	FILENOEXT=${FILENAME%.*}
+	USERFILE=$(head -n 1 $PWD/user.txt)
+
+	qrencode -o $FILENOEXT.png https://www.github.com/$USERFILE/qr-repo/blob/master/$FILENAME
+	mv "$FILENAME".png $PWD
+
+	git add .
+	git commit -m 'new file'
+	git push
 fi
-
-FILEPATH=$1
-FILENAME=${FILEPATH##*/}
-FILENOEXT=${FILENAME%.*}
-USERFILE=$(head -n 1 $PWD/user.txt)
-
-qrencode -o $FILENOEXT.png https://www.github.com/$USERFILE/qr-repo/blob/master/$FILENAME
-mv "$FILENAME".png $PWD
-
-git add .
-git commit -m 'new file'
-git push
