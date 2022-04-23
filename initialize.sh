@@ -27,7 +27,7 @@ function setup()
     git init qr-repo/
     echo $USERNAME > $PWD/qr-repo/user.txt
 #file cleanup
-    mv $PWD/qr.sh $PWD/qr-repo
+    mv $PWD/qr.sh $PWD/qr-repo && mv $PWD/initialize.sh $PWD/qr-repo
     cd $PWD/qr-repo
     git add . && git commit -m "initial commit"
 #last bit of repo setup
@@ -38,5 +38,3 @@ function setup()
 
 check_github
 setup
-cd ..
-rm /initialize.sh
