@@ -22,20 +22,26 @@ function check_github()
 
 function setup()
 {
-    echo 'Attempting to install utility libQRencode...'
+    echo "Attempting to install utility libQRencode..."
     sudo apt-get install qrencode 
 
 #logging in if not already
     gh auth status || gh auth login
-    read -p 'Please enter your Github username: ' USERNAME
+    read -p "Please enter your Github username: " USERNAME
 #the repository
-    git init QR-repo/
-    echo $USERNAME > $PWD/QR-repo/user.txt
+    git init qr-repo/
+    echo $USERNAME > $PWD/qr-repo/user.txt
+#file cleanup
+    mv $PWD/qr.sh $PWD/qr-repo
+    cd $PWD/qr-repo
+    git add . && git commit -m "initial commit"
+#last bit of repo setup
+    gh repo create qr-repo --public --push -r origin -s .
+    echo "The script ./qr.sh is now capable of pushing files to git and generating QR codes that can easily be sent in the files' stead."
+
 }
 
 check_github
 setup
-mv $PWD/qr.sh $PWD/QR-repo
-cd $PWD/QR-repo
-echo "The script ./qr.sh is now capable of pushing files to git and generating QR codes that can easily be sent in the files' stead."
-rm $PWD/initialize.sh
+cd ..
+rm /initialize.sh

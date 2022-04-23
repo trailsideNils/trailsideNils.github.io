@@ -21,7 +21,7 @@ fi
 
 USER=$(head -n 1 $PWD/user.txt)
 
-qrencode https://www.github.com/$USER/QR-repo/blob/main/$1 $1.png
+qrencode -o $1.png https://www.github.com/$USER/qr-repo/blob/main/$1
 
 git add .
 git commit -m 'new file'
