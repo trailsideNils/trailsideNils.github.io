@@ -10,7 +10,7 @@ then
 
 fi
 
-if [ ls $1 -ne 0 ]
+if [ command "ls $1" -ne 0 ]
 then
 	echo "Error: $1 was not found."
 	exit 1
