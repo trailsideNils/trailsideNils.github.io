@@ -10,7 +10,7 @@ then
 
 fi
 
-if [ -f $1 ]
+if [ ! -f $1 ]
 then
 	echo "Error: $1 was not found."
 	exit 1
