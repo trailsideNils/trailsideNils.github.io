@@ -15,7 +15,7 @@ then
 	echo "Error: $1 was not found."
 	exit 1
 else
-	echo 'test'
+	echo $1 $PWD
 	cp $1 $PWD
 fi
 
